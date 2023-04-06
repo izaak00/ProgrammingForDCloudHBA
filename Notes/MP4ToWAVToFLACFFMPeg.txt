@@ -1,0 +1,17 @@
+using System.Diagnostics;
+
+// Path to FFmpeg executable
+string ffmpegPath = @"C:\ffmpeg\bin\ffmpeg.exe";
+
+// Input and output file paths
+string inputFilePath = @"C:\videos\input.mp4";
+string wavFilePath = @"C:\audio\output.wav";
+string flacFilePath = @"C:\audio\output.flac";
+
+// Convert MP4 to WAV
+string args1 = $"-i \"{inputFilePath}\" -vn -acodec pcm_s16le -ar 44100 -ac 2 \"{wavFilePath}\"";
+Process.Start(ffmpegPath, args1).WaitForExit();
+
+// Convert WAV to FLAC
+string args2 = $"-i \"{wavFilePath}\" -c:a flac \"{flacFilePath}\"";
+Process.Start(ffmpegPath, args2).WaitForExit();
