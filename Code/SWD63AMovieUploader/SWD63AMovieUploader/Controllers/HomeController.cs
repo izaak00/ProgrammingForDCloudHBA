@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SWD63AMovieUploader.Models;
 using System.Diagnostics;
@@ -28,6 +29,12 @@ namespace SWD63AMovieUploader.Controllers
         public IActionResult MembersHome()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Signout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

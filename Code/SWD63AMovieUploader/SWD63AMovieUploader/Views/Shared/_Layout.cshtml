@@ -28,7 +28,14 @@
                     </ul>
                 </div>
                 <div>
-                    <a href="/Home/MembersHome">Log in</a>
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                        <a href="/home/Signout">Sign out</a> <span>&nbsp; &nbsp;Welcome</span> @User.Identity.Name;
+                    }
+                    else
+                    {
+                        <a href="/Home/MembersHome">Log in</a>
+                    }                  
                 </div>
             </div>
         </nav>
