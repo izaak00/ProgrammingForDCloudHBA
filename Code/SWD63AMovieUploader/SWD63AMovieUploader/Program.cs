@@ -2,6 +2,7 @@ using Google.Cloud.SecretManager.V1;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.CodeAnalysis;
+using SWD63AMovieUploader.DataAccess;
 using System.Configuration;
 
 IConfiguration configuration = new ConfigurationBuilder()
@@ -43,6 +44,7 @@ builder.Services
         options.ClientSecret = secretKey;
     });
 
+builder.Services.AddScoped(provider => new FireStoreMovieRepository(projectId));
 
 builder.Services.AddRazorPages();
 

@@ -256,3 +256,8 @@ D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMo
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Grpc.Core.Api.dll
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Grpc.Net.Client.dll
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Grpc.Net.Common.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Google.Cloud.Firestore.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Google.Cloud.Firestore.V1.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Google.Cloud.Location.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\Google.LongRunning.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\bin\Debug\net6.0\System.Linq.Async.dll
