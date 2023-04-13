@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Google.Cloud.Storage.V1;
+using Microsoft.AspNetCore.Mvc;
+using NuGet.DependencyResolver;
 using SWD63AMovieUploader.DataAccess;
 using SWD63AMovieUploader.Models;
+using System.Security.AccessControl;
 using System.Security.Claims;
 
 namespace SWD63AMovieUploader.Controllers
@@ -20,12 +23,27 @@ namespace SWD63AMovieUploader.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Movie m)
+        public async Task <IActionResult> Create(Movie m, IFormFile file, [FromServices] IConfiguration config)
         {
             try
             {
+                string objectName = Guid.NewGuid() + System.IO.Path.GetExtension(file.FileName);
+                //-----------------adding the movie to cloud storage-----------------
+                string bucketName = config["bucket"];
+                string projectId = config["project"];
+
+                var storage = StorageClient.Create();
+                using var fileStream = file.OpenReadStream();
+                storage.UploadObject(bucketName, objectName, null, fileStream);
+
+                m.Link = $"https://storage.googleapis.com/{bucketName}/{objectName}";
+
+                //-----------------end adding the movie to cloud storage-----------------
                 string name = User.Identity.Name;
-                fmr.AddMovie(m,name);
+                
+                // adding rest of info in firestore
+                await fmr.AddMovie(m,name);
+
                 TempData["success"] = "Movie added successfully";
             }
             catch (Exception ex)

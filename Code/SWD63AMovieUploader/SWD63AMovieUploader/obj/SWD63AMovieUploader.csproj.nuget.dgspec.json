@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Google.Cloud.Storage.V1": {
+              "target": "Package",
+              "version": "[4.4.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[6.0.15, )"

@@ -13,9 +13,10 @@ namespace SWD63AMovieUploader.DataAccess
         }
 
         [Authorize]
-        public async void AddMovie(Movie m,string name)
+        public async Task AddMovie(Movie m,string name)
         {
             m.Owner = name;
+            m.Status = "Not available";
             await db.Collection("movies").Document().SetAsync(m); 
         }
     }
