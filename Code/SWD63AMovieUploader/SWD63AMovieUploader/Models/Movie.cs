@@ -6,6 +6,7 @@ namespace SWD63AMovieUploader.Models
     public class Movie
     {
         private DateTime _dateTime;
+
         [FirestoreProperty]
         public string Title { get; set; }
         [FirestoreProperty]
@@ -15,7 +16,8 @@ namespace SWD63AMovieUploader.Models
           set { _dateTime = value.ToUniversalTime(); } 
         }
         [FirestoreProperty]
-        public string Owner { get; set; }
+        public string Owner 
+        { get; set; }
         [FirestoreProperty]
         public string Thumbnail { get; set; }
         [FirestoreProperty]

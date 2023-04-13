@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SWD63AMovieUploader.DataAccess;
 using SWD63AMovieUploader.Models;
+using System.Security.Claims;
 
 namespace SWD63AMovieUploader.Controllers
 {
@@ -23,7 +24,8 @@ namespace SWD63AMovieUploader.Controllers
         {
             try
             {
-                fmr.AddMovie(m);
+                string name = User.Identity.Name;
+                fmr.AddMovie(m,name);
                 TempData["success"] = "Movie added successfully";
             }
             catch (Exception ex)

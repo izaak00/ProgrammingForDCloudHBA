@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Microsoft.AspNetCore.Authorization;
 using SWD63AMovieUploader.Models;
 
 namespace SWD63AMovieUploader.DataAccess
@@ -11,8 +12,10 @@ namespace SWD63AMovieUploader.DataAccess
             db = FirestoreDb.Create(project);
         }
 
-        public async void AddMovie(Movie m)
+        [Authorize]
+        public async void AddMovie(Movie m,string name)
         {
+            m.Owner = name;
             await db.Collection("movies").Document().SetAsync(m); 
         }
     }
