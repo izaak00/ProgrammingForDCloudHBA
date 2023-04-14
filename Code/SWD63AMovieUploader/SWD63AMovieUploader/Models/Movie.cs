@@ -24,6 +24,6 @@ namespace SWD63AMovieUploader.Models
         public string Status { get; set; }
 
         [FirestoreProperty]
-        public string Link { get; set; }
+        public string LinkMovie { get; set; }
     }
 }
