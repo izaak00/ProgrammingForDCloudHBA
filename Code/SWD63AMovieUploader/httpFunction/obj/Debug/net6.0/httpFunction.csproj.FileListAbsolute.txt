@@ -38,3 +38,8 @@ D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunc
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Grpc.Net.Common.dll
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\NReco.VideoConverter.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Google.Cloud.Firestore.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Google.Cloud.Firestore.V1.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\Google.Cloud.Location.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunction\bin\Debug\net6.0\System.Linq.Async.dll

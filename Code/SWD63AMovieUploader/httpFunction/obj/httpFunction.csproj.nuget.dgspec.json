@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
             "Google.Cloud.Functions.Hosting": {
               "target": "Package",
               "version": "[2.0.0, )"
@@ -54,7 +58,11 @@
             },
             "Google.Cloud.Storage.V1": {
               "target": "Package",
-              "version": "[4.4.0, )"
+              "version": "[4.5.0, )"
+            },
+            "NReco.VideoConverter": {
+              "target": "Package",
+              "version": "[1.2.1, )"
             }
           },
           "imports": [

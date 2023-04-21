@@ -39,7 +39,7 @@ namespace SWD63AMovieUploader.Controllers
                 using var fileStream = movieFile.OpenReadStream();
                 storage.UploadObject(bucketName, objectName, null, fileStream);
 
-                m.LinkMovie = $"https://storage.googleapis.com/{bucketName}/{objectName}";
+                m.LinkMovie = $"https://storage.googleapis.com/{bucketName}/{System.IO.Path.GetExtension(movieFile.FileName)}";
 
                 //-----------------end adding the movie to cloud storage-----------------
                 var email = User.FindFirstValue(ClaimTypes.Email);
