@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Text;
+using System.Diagnostics;
+using System;
 
 class Program
 {
@@ -23,36 +25,47 @@ class Program
 
         string storageUri = "https://storage.googleapis.com/pfc_movie_bucket/Talking.mp4";
         string bucketName = "pfc_movie_bucket";
+        string objectName = Guid.NewGuid() + ".flac";
 
         try
         {
-            var ffMpeg = new NReco.VideoConverter.FFMpegConverter();
+            // set up FFmpeg process
+            var processStartInfo = new ProcessStartInfo
+            {
+                FileName = "/usr/bin/ffmpeg",
+                Arguments = $"-i \"{storageUri}\" -vn -acodec flac -f flac pipe:1",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
 
-            // Create a MemoryStream to store the output audio
-            MemoryStream audioStream = new MemoryStream();
+            using (var process = new Process { StartInfo = processStartInfo })
+            {
+                // start FFmpeg process
+                process.Start();
 
-            ffMpeg.ConvertMedia(storageUri, audioStream, Format.flac);
+                // read output into memory stream
+                using (var audioStream = new MemoryStream())
+                {
+                    process.StandardOutput.BaseStream.CopyTo(audioStream);
+                    audioStream.Seek(0, SeekOrigin.Begin);
 
-            // Create a byte array from the MemoryStream contents
-            byte[] audioBytes = audioStream.ToArray();
+                    // Create a byte array from the MemoryStream contents
+                    byte[] audioBytes = audioStream.ToArray();
 
-            // Create a new MemoryStream from the byte array
-            MemoryStream audioMemoryStream = new MemoryStream(audioBytes);
+                    // Create a new MemoryStream from the byte array
+                    MemoryStream audioMemoryStream = new MemoryStream(audioBytes);
 
-            string objectName = Guid.NewGuid() + ".flac";
+                    // Create an IFormFile object from the MemoryStream
+                    IFormFile file = new FormFile(audioMemoryStream, 0, audioBytes.Length, null, objectName);
+                    Stream fileStream = file.OpenReadStream();
 
-            // Create an IFormFile object from the MemoryStream
-            IFormFile file = new FormFile(audioMemoryStream, 0, audioBytes.Length, null, objectName);
-
-            //IFormFile file = new FormFile(File.OpenRead(outputFilePath), 0, new FileInfo(outputFilePath).Length, null, Path.GetFileName(outputFilePath));
-
-            Stream fileStream = file.OpenReadStream();
-
-            storageClient.UploadObject(bucketName, objectName, null, fileStream);
-
+                    storageClient.UploadObject(bucketName, objectName, null, fileStream);
+                }
+            }
+           
             string flacAudioUri = $"gs://{bucketName}/{objectName}";
 
-            //ConvertMovieToAudio(storageUri, outputFilePath, bucketName);
             Console.WriteLine($"Conversion successful: {flacAudioUri}");
             await transcribe(flacAudioUri,db,storageUri);
         }

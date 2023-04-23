@@ -14,6 +14,6 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)google.cloud.functions.hosting\2.0.0\build\net6.0\Google.Cloud.Functions.Hosting.props" Condition="Exists('$(NuGetPackageRoot)google.cloud.functions.hosting\2.0.0\build\net6.0\Google.Cloud.Functions.Hosting.props')" />
+    <Import Project="$(NuGetPackageRoot)google.cloud.functions.hosting\1.0.0\build\netcoreapp3.1\Google.Cloud.Functions.Hosting.props" Condition="Exists('$(NuGetPackageRoot)google.cloud.functions.hosting\1.0.0\build\netcoreapp3.1\Google.Cloud.Functions.Hosting.props')" />
   </ImportGroup>
 </Project>
