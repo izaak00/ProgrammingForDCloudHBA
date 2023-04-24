@@ -10,6 +10,7 @@
         "dependencies": {
           "Google.Cloud.Firestore": "3.2.0",
           "Google.Cloud.Firestore.V1": "3.2.0",
+          "Google.Cloud.PubSub.V1": "3.5.0",
           "Google.Cloud.SecretManager.V1": "2.1.0",
           "Google.Cloud.Storage.V1": "4.4.0",
           "Microsoft.AspNetCore.Authentication.Google": "6.0.15",
@@ -167,6 +168,18 @@
           "lib/netstandard2.1/Google.Cloud.Location.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "Google.Cloud.PubSub.V1/3.5.0": {
+        "dependencies": {
+          "Google.Api.Gax.Grpc": "4.3.1",
+          "Google.Cloud.Iam.V1": "3.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Cloud.PubSub.V1.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
           }
         }
       },
@@ -2369,6 +2382,13 @@
       "sha512": "sha512-qxJ6dATru5XYQzuE8f3izGKPE14Zpc5mEBEROMM/FXYzMug+3ezoRktcD00l2nmMeJ7CIwWZjx9uRpDIiZTLEA==",
       "path": "google.cloud.location/2.0.0",
       "hashPath": "google.cloud.location.2.0.0.nupkg.sha512"
+    },
+    "Google.Cloud.PubSub.V1/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QI4H2D6zdouKtwStblMAGztY4QG+UjuLqrEevdY1NcqnRkCBY/kAMizHUPoq1NDs572ni7Tq/t+wkosQKg98dQ==",
+      "path": "google.cloud.pubsub.v1/3.5.0",
+      "hashPath": "google.cloud.pubsub.v1.3.5.0.nupkg.sha512"
     },
     "Google.Cloud.SecretManager.V1/2.1.0": {
       "type": "package",

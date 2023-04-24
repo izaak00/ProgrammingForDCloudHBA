@@ -12,9 +12,11 @@ namespace SWD63AMovieUploader.Controllers
     public class MoviesController : Controller
     {
         FireStoreMovieRepository fmr;
-        public MoviesController(FireStoreMovieRepository _fmr)
+        PubsubTranscriberRepository pstr;
+        public MoviesController(FireStoreMovieRepository _fmr, PubsubTranscriberRepository _pstr)
         {
             fmr = _fmr;
+            pstr = _pstr;
         }
         
         [Authorize]
@@ -39,7 +41,7 @@ namespace SWD63AMovieUploader.Controllers
                 using var fileStream = movieFile.OpenReadStream();
                 storage.UploadObject(bucketName, objectName, null, fileStream);
 
-                m.LinkMovie = $"https://storage.googleapis.com/{bucketName}/{System.IO.Path.GetExtension(movieFile.FileName)}";
+                m.LinkMovie = $"https://storage.googleapis.com/{bucketName}/{objectName}";
 
                 //-----------------end adding the movie to cloud storage-----------------
                 var email = User.FindFirstValue(ClaimTypes.Email);
@@ -52,8 +54,10 @@ namespace SWD63AMovieUploader.Controllers
                 m.Thumbnail = $"https://storage.googleapis.com/{bucketName}/{thumbnailObjName}";
                 //--------------end of adding thumbnail to bucket--------------
 
+                m.DateTimeUtc = DateTime.UtcNow;
                 // adding rest of info in firestore
                 await fmr.AddMovie(m, email);
+                await pstr.PushMessage(m);
 
                 TempData["success"] = "Movie added successfully";
             }
@@ -70,6 +74,12 @@ namespace SWD63AMovieUploader.Controllers
         {
             var list = await (fmr.GetMovies(User.FindFirstValue(ClaimTypes.Email)));
             return View(list);
+        }
+
+        [Authorize]
+        public IActionResult Transcribe(Movie m)
+        {
+            return RedirectToAction("Index","Subscriber");
         }
     }
 }

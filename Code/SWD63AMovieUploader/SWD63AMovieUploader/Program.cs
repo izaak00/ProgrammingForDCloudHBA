@@ -46,6 +46,8 @@ builder.Services
 
 builder.Services.AddScoped(provider => new FireStoreMovieRepository(projectId));
 
+builder.Services.AddScoped(provider => new PubsubTranscriberRepository(projectId));
+
 builder.Services.AddRazorPages();
 
 // Add services to the container.

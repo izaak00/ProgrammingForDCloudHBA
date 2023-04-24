@@ -211,6 +211,23 @@
           }
         }
       },
+      "Google.Cloud.PubSub.V1/3.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.Gax.Grpc": "[4.3.1, 5.0.0)",
+          "Google.Cloud.Iam.V1": "[3.0.0, 4.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.1/Google.Cloud.PubSub.V1.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Cloud.PubSub.V1.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Google.Cloud.SecretManager.V1/2.1.0": {
         "type": "package",
         "dependencies": {
@@ -3756,6 +3773,25 @@
         "lib/netstandard2.1/Google.Cloud.Location.dll",
         "lib/netstandard2.1/Google.Cloud.Location.pdb",
         "lib/netstandard2.1/Google.Cloud.Location.xml"
+      ]
+    },
+    "Google.Cloud.PubSub.V1/3.5.0": {
+      "sha512": "QI4H2D6zdouKtwStblMAGztY4QG+UjuLqrEevdY1NcqnRkCBY/kAMizHUPoq1NDs572ni7Tq/t+wkosQKg98dQ==",
+      "type": "package",
+      "path": "google.cloud.pubsub.v1/3.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.cloud.pubsub.v1.3.5.0.nupkg.sha512",
+        "google.cloud.pubsub.v1.nuspec",
+        "lib/net462/Google.Cloud.PubSub.V1.dll",
+        "lib/net462/Google.Cloud.PubSub.V1.pdb",
+        "lib/net462/Google.Cloud.PubSub.V1.xml",
+        "lib/netstandard2.1/Google.Cloud.PubSub.V1.dll",
+        "lib/netstandard2.1/Google.Cloud.PubSub.V1.pdb",
+        "lib/netstandard2.1/Google.Cloud.PubSub.V1.xml"
       ]
     },
     "Google.Cloud.SecretManager.V1/2.1.0": {
@@ -9926,6 +9962,7 @@
     "net6.0": [
       "Google.Cloud.Firestore >= 3.2.0",
       "Google.Cloud.Firestore.V1 >= 3.2.0",
+      "Google.Cloud.PubSub.V1 >= 3.5.0",
       "Google.Cloud.SecretManager.V1 >= 2.1.0",
       "Google.Cloud.Storage.V1 >= 4.4.0",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.15",
@@ -9983,6 +10020,10 @@
           "Google.Cloud.Firestore.V1": {
             "target": "Package",
             "version": "[3.2.0, )"
+          },
+          "Google.Cloud.PubSub.V1": {
+            "target": "Package",
+            "version": "[3.5.0, )"
           },
           "Google.Cloud.SecretManager.V1": {
             "target": "Package",

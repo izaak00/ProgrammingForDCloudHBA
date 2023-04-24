@@ -32,7 +32,7 @@ class Program
             // set up FFmpeg process
             var processStartInfo = new ProcessStartInfo
             {
-                FileName = "/usr/bin/ffmpeg",
+                FileName = "ffmpeg",
                 Arguments = $"-i \"{storageUri}\" -vn -acodec flac -f flac pipe:1",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,

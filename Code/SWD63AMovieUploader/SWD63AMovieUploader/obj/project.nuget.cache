@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XIQTzI9EYsfgZ4pFqfJBlQB7uiRie2jMX578XOYzpUne/P2lKZwFptd06VwZXEs0FW9ACvOuaAJHudO6na4/lQ==",
+  "dgSpecHash": "zy4dvQpQmV1AyVMq7SKo5ScuLh35AXVZKaoJKr5T5uNtQFma/nFXkkbhT0UnXH/f89ee2dyvEeflgXStObKxDg==",
   "success": true,
   "projectFilePath": "D:\\School\\Repositories\\ProgrammingForDCloudHBA\\Code\\SWD63AMovieUploader\\SWD63AMovieUploader\\SWD63AMovieUploader.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.firestore.v1\\3.2.0\\google.cloud.firestore.v1.3.2.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.iam.v1\\3.0.0\\google.cloud.iam.v1.3.0.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.location\\2.0.0\\google.cloud.location.2.0.0.nupkg.sha512",
+    "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.pubsub.v1\\3.5.0\\google.cloud.pubsub.v1.3.5.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.secretmanager.v1\\2.1.0\\google.cloud.secretmanager.v1.2.1.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.storage.v1\\4.4.0\\google.cloud.storage.v1.4.4.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.longrunning\\3.0.0\\google.longrunning.3.0.0.nupkg.sha512",

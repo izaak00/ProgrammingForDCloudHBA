@@ -27,6 +27,6 @@ namespace SWD63AMovieUploader.Models
         public string LinkMovie { get; set; }
 
         [FirestoreProperty]
-        public string Transcription { set { Transcription = ""; } }
+        public string Transcription { get; set; }
     }
 }
