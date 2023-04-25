@@ -18,11 +18,20 @@
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
                         <p class="card-text">@item.Owner</p>
-                        <p class="card-text">@item.Transcription</p>
-                        <a href="@item.LinkMovie" class="btn btn-primary">Download</a>
+                        @*<p class="card-text">@item.Transcription</p>*@
+                       @* <a href="@item.LinkMovie" class="btn btn-primary">Download</a>*@
+                        <form asp-action="DownloadMovie" asp-controller="Movies" method="post">
+                            <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
+                            <input type="hidden" name="Owner" value="@item.Owner" />
+                            <button type="submit" class="btn btn-primary mr-2 mb-2">Download</button>
+                        </form>
                         @if (item.Status == "Not available")
                         {
-                            <a href="@Url.Action("Transcribe", new { LinkMovie = item.LinkMovie })" class="btn btn-primary">Transcribe</a>
+                            <a href="@Url.Action("Transcribe", new { LinkMovie = item.LinkMovie })" class="btn btn-primary mr-2">Transcribe</a>
+                        }
+                        else 
+                        {
+                            <a href="@Url.Action("Download_SRT", new { Transcription = item.Transcription })" class="btn btn-primary mr-2">SRT</a>
                         }
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger float-right" })
                     </div>

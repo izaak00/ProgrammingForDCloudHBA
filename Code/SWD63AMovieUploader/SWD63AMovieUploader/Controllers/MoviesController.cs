@@ -76,6 +76,13 @@ namespace SWD63AMovieUploader.Controllers
             return View(list);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DownloadMovie(string owner, string LinkMovie)
+        {
+            await fmr.AddDownloads(owner, LinkMovie);
+            return Redirect(LinkMovie);
+        }
+
         [Authorize]
         public IActionResult Transcribe(Movie m)
         {

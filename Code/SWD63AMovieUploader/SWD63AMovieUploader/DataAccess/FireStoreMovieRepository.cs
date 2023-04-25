@@ -36,5 +36,30 @@ namespace SWD63AMovieUploader.DataAccess
             }
             return movies;
         }
+
+        [Authorize]
+        public async Task AddDownloads(string owner, string LinkMovie)
+        {
+            var docIdOfTheBookBeingReserved = await GetMovieDocumentId(LinkMovie);
+
+            var docRef = db.Collection($"movies/{docIdOfTheBookBeingReserved}/downloads").Document();
+
+            var data = new Dictionary<string, object>
+            {
+                { "owner", owner },
+                { "timestamp", DateTime.UtcNow }
+            };
+
+            await docRef.SetAsync(data);
+        }
+
+        public async Task<string> GetMovieDocumentId(string LinkMovie)
+        {
+            Query allMoviesQuery = db.Collection("movies").WhereEqualTo("LinkMovie", LinkMovie);
+            QuerySnapshot allMoviesQuerySnapshot = await allMoviesQuery.GetSnapshotAsync();
+
+            DocumentSnapshot documentSnapshot = allMoviesQuerySnapshot.Documents.FirstOrDefault();
+            return documentSnapshot.Id;
+        }
     }
 }
