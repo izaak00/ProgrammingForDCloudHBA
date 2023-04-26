@@ -9,7 +9,7 @@ namespace SWD63AMovieUploader.Controllers
 {
     public class SubscriberController : Controller
     {
-        public async Task<int> Index()
+        public async Task<IActionResult> Index()
         {
             string projectId = "swd63aprogrammingforthecloud";
             string subscriptionId = "transcribe-sub";
@@ -66,7 +66,7 @@ namespace SWD63AMovieUploader.Controllers
                 }
             }
 
-            return messageCount;
+            return RedirectToAction("Index","Movies");
         }
     }
 }

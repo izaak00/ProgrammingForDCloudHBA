@@ -27,7 +27,7 @@
                         </form>
                         @if (item.Status == "Not available")
                         {
-                            <a href="@Url.Action("Transcribe", new { LinkMovie = item.LinkMovie })" class="btn btn-primary mr-2">Transcribe</a>
+                            <a href="@Url.Action("Download_SRT", new { Transcription = item.Transcription })" class="btn btn-primary mr-2 disabled">Generating SRT</a>
                         }
                         else 
                         {

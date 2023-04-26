@@ -1,1 +1,7 @@
+dotnet6
+
 gcloud functions deploy demo-http-function-swd63a --allow-unauthenticated --entry-point httpFunction.Function --region us-central1 --runtime dotnet6 --trigger-http
+
+dotnet 3
+
+gcloud functions deploy movie-transcriber-http-function --allow-unauthenticated --entry-point httpFunction.Function --region us-central1 --runtime dotnet3 --trigger-http
