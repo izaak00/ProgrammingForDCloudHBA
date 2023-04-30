@@ -18,6 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@item.Title</h5>
                         <p class="card-text">@item.Owner</p>
+                        <p class="card-text">@item.Status</p>
                         @*<p class="card-text">@item.Transcription</p>*@
                        @* <a href="@item.LinkMovie" class="btn btn-primary">Download</a>*@
                         <form asp-action="DownloadMovie" asp-controller="Movies" method="post">
@@ -31,9 +32,11 @@
                         }
                         else 
                         {
-                            <a href="@Url.Action("Download_SRT", new { Transcription = item.Transcription })" class="btn btn-primary mr-2">SRT</a>
+                            <form asp-action="DownloadSRT" asp-controller="Movies" method="post">
+                                <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
+                                <button type="submit" class="btn btn-primary mr-2 mb-2">DownloadSRT</button>
+                            </form>
                         }
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger float-right" })
                     </div>
                 </div>
             </div>

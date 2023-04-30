@@ -84,10 +84,16 @@ namespace SWD63AMovieUploader.Controllers
             return Redirect(LinkMovie);
         }
 
-        //[Authorize]
-        //public IActionResult Transcribe(Movie m)
-        //{
-        //    return RedirectToAction("Index","Subscriber");
-        //}
+        // create function GenerateSRT(string Linkmovie)
+        // this function will basecally push a message to srt-sub with the link of the new movie
+        // then the cron job will send the details to the httpfunction
+        // also in the httpfunction, we need to parse the json object that is sent by the pub/sub
+        [Authorize]
+        public async Task<IActionResult> DownloadSRT(string LinkMovie)
+        {
+            string downloadLink = await fmr.DownloadSRT(LinkMovie);
+            return Redirect(downloadLink);
+            //return RedirectToAction("Index", "Subscriber");
+        }
     }
 }

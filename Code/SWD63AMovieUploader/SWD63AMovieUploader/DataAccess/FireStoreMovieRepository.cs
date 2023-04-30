@@ -40,9 +40,9 @@ namespace SWD63AMovieUploader.DataAccess
         [Authorize]
         public async Task AddDownloads(string owner, string LinkMovie)
         {
-            var docIdOfTheBookBeingReserved = await GetMovieDocumentId(LinkMovie);
+            var docIdOfTheMovieBeingDownloaded = await GetMovieDocumentId(LinkMovie);
 
-            var docRef = db.Collection($"movies/{docIdOfTheBookBeingReserved}/downloads").Document();
+            var docRef = db.Collection($"movies/{docIdOfTheMovieBeingDownloaded}/downloads").Document();
 
             var data = new Dictionary<string, object>
             {
@@ -52,6 +52,38 @@ namespace SWD63AMovieUploader.DataAccess
 
             await docRef.SetAsync(data);
         }
+
+        [Authorize]
+        public async Task<string> DownloadSRT(string LinkMovie)
+        {
+            var docId = await GetMovieDocumentId(LinkMovie);
+
+            // Get a reference to the collection of srt documents
+            CollectionReference srtCollection = db.Collection($"movies/{docId}/srt");
+
+            // Get a snapshot of all documents in the collection
+            QuerySnapshot snapshot = await srtCollection.GetSnapshotAsync();
+
+            if (snapshot.Documents.Count > 0)
+            {
+                DocumentSnapshot docSnapshot = snapshot.Documents[0];
+                if (docSnapshot.ContainsField("LinkToBucketForSRT"))
+                {
+                    return docSnapshot.GetValue<string>("LinkToBucketForSRT");
+                }
+                else
+                {
+                    Console.WriteLine("The document does not contain the field LinkToBucketForSRT.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no documents in the srt subcollection.");
+            }
+
+            return "";
+        }
+
 
         public async Task<string> GetMovieDocumentId(string LinkMovie)
         {
