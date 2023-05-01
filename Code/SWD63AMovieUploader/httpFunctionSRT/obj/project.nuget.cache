@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6DgkDYJVsMa5TQukO3VdVesi90IHbb9LzZ5vcfSGS7mW3LZYaDgbGP6YDSTFU/rZkbd0FmW3BbDH1YvIQpvmXg==",
+  "dgSpecHash": "Hqoh2TKdRtxpTKnLBzNmSL03iuWmU3FmvB2j2GALoFvneNeGGtLXPTUt9hMEp2wwsNybBUZE17SB4uvndhp5Qw==",
   "success": true,
   "projectFilePath": "D:\\School\\Repositories\\ProgrammingForDCloudHBA\\Code\\SWD63AMovieUploader\\httpFunctionSRT\\httpFunctionSRT.csproj",
   "expectedPackageFiles": [
@@ -19,7 +19,9 @@
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.firestore.v1\\3.2.0\\google.cloud.firestore.v1.3.2.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.functions.framework\\2.0.0\\google.cloud.functions.framework.2.0.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.functions.hosting\\2.0.0\\google.cloud.functions.hosting.2.0.0.nupkg.sha512",
+    "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.iam.v1\\3.0.0\\google.cloud.iam.v1.3.0.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.location\\2.0.0\\google.cloud.location.2.0.0.nupkg.sha512",
+    "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.pubsub.v1\\3.5.0\\google.cloud.pubsub.v1.3.5.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.cloud.storage.v1\\4.5.0\\google.cloud.storage.v1.4.5.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.longrunning\\3.0.0\\google.longrunning.3.0.0.nupkg.sha512",
     "C:\\Users\\izaak\\.nuget\\packages\\google.protobuf\\3.21.0\\google.protobuf.3.21.0.nupkg.sha512",

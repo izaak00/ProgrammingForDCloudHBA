@@ -13,10 +13,12 @@ namespace SWD63AMovieUploader.Controllers
     {
         FireStoreMovieRepository fmr;
         PubsubTranscriberRepository pstr;
-        public MoviesController(FireStoreMovieRepository _fmr, PubsubTranscriberRepository _pstr)
+        PubsubSRTRepository pssrtr;
+        public MoviesController(FireStoreMovieRepository _fmr, PubsubTranscriberRepository _pstr, PubsubSRTRepository _pssrtr)
         {
             fmr = _fmr;
             pstr = _pstr;
+            pssrtr = _pssrtr;
         }
         
         [Authorize]
@@ -84,16 +86,19 @@ namespace SWD63AMovieUploader.Controllers
             return Redirect(LinkMovie);
         }
 
-        // create function GenerateSRT(string Linkmovie)
-        // this function will basecally push a message to srt-sub with the link of the new movie
-        // then the cron job will send the details to the httpfunction
-        // also in the httpfunction, we need to parse the json object that is sent by the pub/sub
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> GenerateSRT(string LinkMovie)
+        {
+           await pssrtr.PushMessage(LinkMovie);
+           return RedirectToAction("Index", "Movies");
+        }
+
         [Authorize]
         public async Task<IActionResult> DownloadSRT(string LinkMovie)
         {
             string downloadLink = await fmr.DownloadSRT(LinkMovie);
             return Redirect(downloadLink);
-            //return RedirectToAction("Index", "Subscriber");
         }
     }
 }

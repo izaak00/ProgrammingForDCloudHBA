@@ -12,7 +12,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 var builder = WebApplication.CreateBuilder(args);
 
 System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS",
-@"D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\SWD63AMovieUploader\swd63aprogrammingforthecloud-ba30695f338b.json");
+@"swd63aprogrammingforthecloud-ba30695f338b.json");
 
 builder.Services.AddControllers();
 
@@ -47,6 +47,7 @@ builder.Services
 builder.Services.AddScoped(provider => new FireStoreMovieRepository(projectId));
 
 builder.Services.AddScoped(provider => new PubsubTranscriberRepository(projectId));
+builder.Services.AddScoped(provider => new PubsubSRTRepository(projectId));
 
 builder.Services.AddRazorPages();
 
@@ -62,9 +63,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

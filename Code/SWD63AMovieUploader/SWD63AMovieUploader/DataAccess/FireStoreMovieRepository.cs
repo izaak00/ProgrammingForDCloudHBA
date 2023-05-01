@@ -17,6 +17,7 @@ namespace SWD63AMovieUploader.DataAccess
         {
             m.Owner = email;        
             m.Status = "Not available";
+            m.SRTStatus = "Not available";
             await db.Collection("movies").Document().SetAsync(m); 
         }
 

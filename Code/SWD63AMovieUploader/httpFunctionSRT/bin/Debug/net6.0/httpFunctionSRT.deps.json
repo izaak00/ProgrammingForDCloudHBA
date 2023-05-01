@@ -10,6 +10,7 @@
         "dependencies": {
           "Google.Cloud.Firestore": "3.2.0",
           "Google.Cloud.Functions.Hosting": "2.0.0",
+          "Google.Cloud.PubSub.V1": "3.5.0",
           "Google.Cloud.Storage.V1": "4.5.0"
         },
         "runtime": {
@@ -204,6 +205,17 @@
           }
         }
       },
+      "Google.Cloud.Iam.V1/3.0.0": {
+        "dependencies": {
+          "Google.Api.Gax.Grpc": "4.3.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Cloud.Iam.V1.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        }
+      },
       "Google.Cloud.Location/2.0.0": {
         "dependencies": {
           "Google.Api.Gax.Grpc": "4.3.1"
@@ -212,6 +224,18 @@
           "lib/netstandard2.1/Google.Cloud.Location.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "Google.Cloud.PubSub.V1/3.5.0": {
+        "dependencies": {
+          "Google.Api.Gax.Grpc": "4.3.1",
+          "Google.Cloud.Iam.V1": "3.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Google.Cloud.PubSub.V1.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
           }
         }
       },
@@ -493,12 +517,26 @@
       "path": "google.cloud.functions.hosting/2.0.0",
       "hashPath": "google.cloud.functions.hosting.2.0.0.nupkg.sha512"
     },
+    "Google.Cloud.Iam.V1/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uZI2PbIj6njiW7dAdlbyGtAFO3oRPXa1o90w9p+aWcuOGTZPJkEShGATcGVXIXtdnQ+pXLfnXhreiRgkgkyx4Q==",
+      "path": "google.cloud.iam.v1/3.0.0",
+      "hashPath": "google.cloud.iam.v1.3.0.0.nupkg.sha512"
+    },
     "Google.Cloud.Location/2.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-qxJ6dATru5XYQzuE8f3izGKPE14Zpc5mEBEROMM/FXYzMug+3ezoRktcD00l2nmMeJ7CIwWZjx9uRpDIiZTLEA==",
       "path": "google.cloud.location/2.0.0",
       "hashPath": "google.cloud.location.2.0.0.nupkg.sha512"
+    },
+    "Google.Cloud.PubSub.V1/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QI4H2D6zdouKtwStblMAGztY4QG+UjuLqrEevdY1NcqnRkCBY/kAMizHUPoq1NDs572ni7Tq/t+wkosQKg98dQ==",
+      "path": "google.cloud.pubsub.v1/3.5.0",
+      "hashPath": "google.cloud.pubsub.v1.3.5.0.nupkg.sha512"
     },
     "Google.Cloud.Storage.V1/4.5.0": {
       "type": "package",

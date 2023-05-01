@@ -28,5 +28,8 @@ namespace SWD63AMovieUploader.Models
 
         [FirestoreProperty]
         public string Transcription { get; set; }
+
+        [FirestoreProperty]
+        public string SRTStatus { get; set; }
     }
 }

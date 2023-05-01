@@ -41,3 +41,5 @@ D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunc
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\obj\Debug\net6.0\httpFunctionSRT.pdb
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\obj\Debug\net6.0\httpFunctionSRT.genruntimeconfig.cache
 D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\obj\Debug\net6.0\ref\httpFunctionSRT.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\bin\Debug\net6.0\Google.Cloud.Iam.V1.dll
+D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\bin\Debug\net6.0\Google.Cloud.PubSub.V1.dll

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Google.Cloud.Firestore;
 using Newtonsoft.Json;
+using Google.Cloud.PubSub.V1;
+using System.Threading;
 
 namespace httpFunctionSRT;
 
@@ -22,7 +24,9 @@ public class Function : IHttpFunction
     /// <returns>A task representing the asynchronous operation.</returns>
     
     private readonly ILogger _logger;
-    
+    string subscriptionId = "srt-sub";
+    string projectId = "swd63aprogrammingforthecloud";
+    bool acknowledge = true;
     public Function(ILogger<Function> logger)
     {
         _logger = logger;
@@ -30,17 +34,55 @@ public class Function : IHttpFunction
 
     public async Task HandleAsync(HttpContext context)
     {
-        // Set up the credentials for the Google Cloud Storage client
-        System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS",
-        @"D:\School\Repositories\ProgrammingForDCloudHBA\Code\SWD63AMovieUploader\httpFunctionSRT\swd63aprogrammingforthecloud-ba30695f338b.json");
-        
-        HttpRequest request = context.Request;
-        string uri = request.Query["uri"];
-
-        string projectId = "swd63aprogrammingforthecloud";
-
         FirestoreDb db = FirestoreDb.Create(projectId);
 
+        await GetObjectFromPubSub(db);
+        await context.Response.WriteAsync("SRT Successfull");
+    }
+
+    public async Task GetObjectFromPubSub(FirestoreDb db)
+    {
+        SubscriptionName subscriptionName = SubscriptionName.FromProjectSubscription(projectId, subscriptionId);
+        SubscriberClient subscriber = await SubscriberClient.CreateAsync(subscriptionName);
+
+        int messageCount = 0;
+
+        List<string> messages = new List<string>();
+
+        Task startTask = subscriber.StartAsync((PubsubMessage message, CancellationToken cancel) =>
+        {
+            string text = System.Text.Encoding.UTF8.GetString(message.Data.ToArray());
+            System.Diagnostics.Debug.WriteLine($"Message {message.MessageId}: {text}");
+            Console.WriteLine($"Message {message.MessageId}: {text}");
+            messages.Add($"{text}");
+            Interlocked.Increment(ref messageCount);
+            return Task.FromResult(acknowledge ? SubscriberClient.Reply.Ack : SubscriberClient.Reply.Nack);
+        });
+        // Run for 5 seconds.
+        await Task.Delay(5000);
+        await subscriber.StopAsync(CancellationToken.None);
+        // Lets make sure that the start task finished successfully after the call to stop.
+        await startTask;
+
+        List<string> uniqueMessages = messages.Distinct().ToList();
+
+        if (uniqueMessages == null)
+        {
+            _logger.LogWarning("There are no messages in pub/sub");
+        }
+
+        _logger.LogInformation("There is a message in pub/sub");
+
+        foreach (var msg in uniqueMessages)
+        {
+            string uri = JsonConvert.DeserializeObject<string>(msg);      
+            
+            await ConnectToFirestore(db, uri);
+        }
+    }
+
+    public async Task ConnectToFirestore(FirestoreDb db, string uri)
+    {
         string bucketName = "pfc_movie_bucket";
         string objectName = Guid.NewGuid() + ".srt";
 
@@ -85,7 +127,21 @@ public class Function : IHttpFunction
                 };
 
                 await docRef.SetAsync(data);
-                //_logger.LogInformation("Successfully added fields, created a new nested collection with the link inside of SRT");
+
+                var srtAvailability = db.Collection("movies").Document(id);
+                try
+                {
+                    await srtAvailability.UpdateAsync(new Dictionary<string, object>
+                    {
+                        { "SRTStatus", "Available" },
+                    });
+                     _logger.LogInformation("Successfully added field, changed SRTStatus to available");
+                }
+                catch (Exception ex)
+                {
+                    
+                     _logger.LogError(ex,"Failed to update status");
+                }           
             }                
             catch (Exception ex)
             {
@@ -96,10 +152,8 @@ public class Function : IHttpFunction
         else 
         {
             _logger.LogError("Could not find movie. Document snapshot is empty.");
-        }
-        await context.Response.WriteAsync("Hello, Functions Framework.");
+        }      
     }
-
 
     public static void ConvertToSrtAndUploadToBucket(string transcription, string bucketName, string objectName)
     {
@@ -143,7 +197,7 @@ public class Function : IHttpFunction
 
         //Upload the SRT content to the Google bucket.
         StorageClient storage = StorageClient.Create();
-        using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(srtBuilder.ToString())))
+        using (MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(srtBuilder.ToString())))
         {
             storage.UploadObject(bucketName, objectName, null, stream);
         }

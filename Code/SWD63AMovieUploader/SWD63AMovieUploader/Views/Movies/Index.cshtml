@@ -19,8 +19,6 @@
                         <h5 class="card-title">@item.Title</h5>
                         <p class="card-text">@item.Owner</p>
                         <p class="card-text">@item.Status</p>
-                        @*<p class="card-text">@item.Transcription</p>*@
-                       @* <a href="@item.LinkMovie" class="btn btn-primary">Download</a>*@
                         <form asp-action="DownloadMovie" asp-controller="Movies" method="post">
                             <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
                             <input type="hidden" name="Owner" value="@item.Owner" />
@@ -28,15 +26,25 @@
                         </form>
                         @if (item.Status == "Not available")
                         {
-                            <a href="@Url.Action("Download_SRT", new { Transcription = item.Transcription })" class="btn btn-primary mr-2 disabled">Generating SRT</a>
+                            <a href="@Url.Action("Download_SRT", new { Transcription = item.Transcription })" class="btn btn-primary mr-2 disabled">Generating Transcription</a>
                         }
                         else 
                         {
-                            <form asp-action="DownloadSRT" asp-controller="Movies" method="post">
-                                <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
-                                <button type="submit" class="btn btn-primary mr-2 mb-2">DownloadSRT</button>
-                            </form>
-                        }
+                            @if (item.SRTStatus == "Available")
+                            {
+                                <form asp-action="DownloadSRT" asp-controller="Movies" method="post">
+                                    <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
+                                    <button type="submit" class="btn btn-primary mr-2 mb-2">DownloadSRT</button>
+                                </form>
+                            }
+                            else 
+                            {
+                                <form asp-action="GenerateSRT" asp-controller="Movies" method="post">
+                                    <input type="hidden" name="LinkMovie" value="@item.LinkMovie" />
+                                    <button type="submit" class="btn btn-primary mr-2 mb-2">GenerateSRT</button>
+                                </form>
+                            }            
+                        }                      
                     </div>
                 </div>
             </div>

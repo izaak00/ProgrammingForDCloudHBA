@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[2.0.0, )"
             },
+            "Google.Cloud.PubSub.V1": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
             "Google.Cloud.Storage.V1": {
               "target": "Package",
               "version": "[4.5.0, )"
