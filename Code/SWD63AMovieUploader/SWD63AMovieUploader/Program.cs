@@ -1,3 +1,4 @@
+using Google.Api;
 using Google.Cloud.SecretManager.V1;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -10,6 +11,15 @@ IConfiguration configuration = new ConfigurationBuilder()
                             .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+    options.OnAppendCookie = cookieContext =>
+        CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+    options.OnDeleteCookie = cookieContext =>
+        CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+});
 
 System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS",
 @"swd63aprogrammingforthecloud-ba30695f338b.json");
@@ -68,7 +78,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCookiePolicy(); // Before UseAuthentication or anything else that writes cookies.
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -77,3 +87,17 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void CheckSameSite(HttpContext httpContext, CookieOptions options)
+{
+    if (options.SameSite == SameSiteMode.None)
+    {
+        var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+        // TODO: Use your User Agent library of choice here.
+        if (true)
+        {
+            // For .NET Core < 3.1 set SameSite = (SameSiteMode)(-1)
+            options.SameSite = SameSiteMode.Unspecified;
+        }
+    }
+}
